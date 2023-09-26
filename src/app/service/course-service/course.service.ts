@@ -1,9 +1,9 @@
 import {Injectable, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {BehaviorSubject, catchError, Observable, throwError} from "rxjs";
-import {CourseDTO} from "../models/api/CourseDTO";
-import {LoadingState} from "../models/LoadingState.enum";
-import {RequestState} from "../models/RequestState";
+import {CourseDTO} from "../../models/api/CourseDTO";
+import {LoadingState} from "../../models/LoadingState.enum";
+import {RequestState} from "../../models/RequestState";
 
 @Injectable({
   providedIn: 'root'

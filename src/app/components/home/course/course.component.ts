@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CourseDTO} from "../../../models/api/CourseDTO";
-import {CourseService} from "../../../service/course.service";
+import {CourseService} from "../../../service/course-service/course.service";
 
 @Component({
   selector: 'app-course',
