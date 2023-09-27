@@ -11,14 +11,11 @@ import {RequestState} from "../../models/RequestState";
 export class CourseService implements OnInit,OnDestroy{
 
   private courseSubject$ = new BehaviorSubject<CourseDTO[]>([]);
-
-  loadingSubject$ = new BehaviorSubject<LoadingState>(LoadingState.Idle);
-  loadingStateAction$ = this.loadingSubject$.asObservable();
   courseAction$ = this.courseSubject$.asObservable();
 
   requestStateSubject$ = new BehaviorSubject<RequestState>({
     loadingState : LoadingState.Idle,
-    message : "Courses are loading..."
+    message : "Idle state"
   })
 
   requestStateAction$ = this.requestStateSubject$.asObservable();
@@ -26,50 +23,6 @@ export class CourseService implements OnInit,OnDestroy{
   private url = "http://localhost:8080/api/v1";
   constructor(private http : HttpClient) {
 
-
-    this.getCourses().subscribe({
-      next : (data) =>{
-        this.courseSubject$.next(data);
-
-       this.loadingSubject$.next(LoadingState.Success);
-
-       this.requestStateSubject$.next({
-         loadingState : LoadingState.Success,
-         message : "Courses are loaded."
-       })
-      },
-      error : (err) =>{
-
-        this.loadingSubject$.next(LoadingState.Error);
-
-        this.requestStateSubject$.next({
-          loadingState : LoadingState.Error,
-          message : "Error loading courses."
-        })
-      }
-    });
-
-  }
-
-  getCourses():Observable<CourseDTO[]>{
-
-   this.loadingSubject$.next(LoadingState.Loading);
-
-   this.requestStateSubject$.next({
-     loadingState : LoadingState.Loading,
-     message : "Courses are loading..."
-   });
-
-
-    return this.http.get<CourseDTO[]>(this.url +"/course/allCourses").pipe(catchError(this.handleError));
-
-
-  }
-
-  ngOnDestroy() {
-  }
-
-  ngOnInit() {
     this.getCourses().subscribe({
 
       next : (data) =>{
@@ -78,7 +31,9 @@ export class CourseService implements OnInit,OnDestroy{
         this.requestStateSubject$.next({
           loadingState : LoadingState.Success,
           message : "Courses are loaded."
-        })
+        });
+
+
       },
       error : (err) =>{
         console.log(err);
@@ -89,7 +44,32 @@ export class CourseService implements OnInit,OnDestroy{
         })
       }
     });
+
   }
+
+  ngOnDestroy() {
+  }
+
+  ngOnInit() {
+
+
+
+  }
+
+  getCourses():Observable<CourseDTO[]>{
+
+
+    this.requestStateSubject$.next({
+      loadingState : LoadingState.Loading,
+      message : "Courses are loading..."
+    });
+
+    return this.http.get<CourseDTO[]>(this.url +"/course/allCourses").pipe(catchError(this.handleError));
+
+
+  }
+
+
 
   handleError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){

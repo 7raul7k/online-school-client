@@ -1,6 +1,8 @@
 
 
-<div *ngIf="(loadingAction$ | async) === LoadingState.Loading;else loadedState">
+<div *ngIf="(requestStateAction$ | async) as requestState ">
+
+<div *ngIf="requestState.loadingState === LoadingState.Loading;else loadedState">
     <p-progressSpinner></p-progressSpinner>
 </div>
 
@@ -10,17 +12,17 @@
     <div class="wrap header--flex">
       <h1 class="header--logo"><a href="index.html">Courses</a></h1>
       <nav>
-        <ul class="header--signedout">
-          <li><a href="sign-up.html">Sign Up</a></li>
-          <li><a href="sign-in.html">Sign In</a></li>
+        <ul class="header--signedin">
+          <li>Welcome, {{username.firstName}} {{username.lastName}}!</li>
+          <li><a href="sign-out.html">Sign Out</a></li>
         </ul>
       </nav>
     </div>
   </header>
   <main>
-      <ng-container *ngIf="(loadingAction$ | async) === LoadingState.Success;else errorState">
+      <ng-container *ngIf="requestState.loadingState === LoadingState.Success;else errorState">
     <div class="wrap main--grid">
-     <app-course *ngFor="let item of courseAction$ | async " [course] = item ></app-course>
+     <app-course *ngFor="let item of courseAction$ | async " [course] = item (onSubscribe)="handleSubscribe($event)" (onUnSubscribe)="handleUnSubscribe($event)"></app-course>
       <a class="course--module course--add--module" href="create-course.html">
                     <span class="course--add--title">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -35,5 +37,6 @@
 </ng-template>
 
 <ng-template #errorState>
-   <app-error [message]="message"></app-error>
+   <app-error [message]="requestState.message"></app-error>
 </ng-template>
+</div>

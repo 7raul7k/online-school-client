@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CourseDTO} from "../../../models/api/CourseDTO";
 import {CourseService} from "../../../service/course-service/course.service";
 
@@ -15,6 +15,9 @@ export class CourseComponent implements OnInit,OnDestroy{
     description : ""
   }
 
+  @Output() onSubscribe = new EventEmitter<CourseDTO>();
+
+  @Output() onUnSubscribe = new EventEmitter<CourseDTO>();
   constructor() {
   }
 
@@ -22,6 +25,15 @@ export class CourseComponent implements OnInit,OnDestroy{
   }
 
   ngOnDestroy() {
+  }
+
+  addSubscribe(course : CourseDTO){
+    this.onSubscribe.emit(course);
+
+  }
+
+  unSubscribe(course : CourseDTO){
+    this.onUnSubscribe.emit(course);
   }
 
 

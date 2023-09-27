@@ -8,20 +8,28 @@ import {EnrolmentDTO} from "../../models/api/EnrolmentDTO";
 })
 export class EnrolmentService implements OnInit, OnDestroy {
 
-  private enrolmentSubject$ = new BehaviorSubject<EnrolmentDTO[]>([]);
-
-  enrolmentAction$ = this.enrolmentSubject$.asObservable();
 
   private url = "http://localhost:8080/api/v1/enrolment";
   constructor(private http: HttpClient ) { }
 
   ngOnInit() {
-  }
 
-  getAllEnrolments() : Observable<EnrolmentDTO[]> {
-    return this.http.get<EnrolmentDTO[]>(this.url + "/allEnrolments").pipe(catchError(this.handleError));
 
   }
+
+  addEnrolment(enrolment : EnrolmentDTO) :Observable<String>{
+
+    return this.http.post<String>(this.url + "/addEnrolment", enrolment).pipe(catchError(this.handleError));
+
+  }
+
+  removeEnrolment(id : number) :Observable<String>{
+
+      return this.http.delete<String>(this.url + `/deleteEnrolment?id=${id}` ).pipe(catchError(this.handleError));
+
+
+  }
+
   ngOnDestroy() {
   }
 
@@ -37,5 +45,6 @@ export class EnrolmentService implements OnInit, OnDestroy {
         }
         return throwError(()=> 'Something bad happened; please try again later.');
     }
+
 
 }
