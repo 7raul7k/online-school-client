@@ -1,9 +1,12 @@
 import {LoadingState} from "./LoadingState.enum";
 
+<<<<<<< HEAD
+export  interface RequestState{
+=======
 export  interface RequestState {
+>>>>>>> online-school-client/task-1-add-components
 
      loadingState : LoadingState;
      message : string;
 
 }
-

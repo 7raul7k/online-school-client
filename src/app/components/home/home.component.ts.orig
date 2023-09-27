@@ -1,4 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+<<<<<<< HEAD
+import {CourseService} from "../../service/course.service";
+import {Observable} from "rxjs";
+import {CourseDTO} from "../../models/api/CourseDTO";
+import {LoadingState} from "../../models/LoadingState.enum";
+import {RequestState} from "../../models/RequestState";
+=======
 import {CourseService} from "../../service/course-service/course.service";
 import {Observable, pluck} from "rxjs";
 import {CourseDTO} from "../../models/api/CourseDTO";
@@ -9,13 +16,39 @@ import {EnrolmentService} from "../../service/enrolment-service/enrolment.servic
 import {StudentService} from "../../service/student-service/student.service";
 import {StudentDTO} from "../../models/api/StudentDTO";
 
+>>>>>>> online-school-client/task-1-add-components
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
+<<<<<<< HEAD
 export class HomeComponent implements OnInit,OnDestroy{
+
+    userId=1;
+   courseAction$ : Observable<CourseDTO[]> | undefined;
+   loadingAction$ : Observable<LoadingState> | undefined;
+   LoadingState = LoadingState;
+
+   message : string = "";
+
+
+  constructor(private courseService : CourseService) {
+  }
+
+  ngOnInit() {
+    this.courseAction$ = this.courseService.courseAction$;
+
+    this.loadingAction$ = this.courseService.loadingStateAction$;
+    }
+
+    ngOnDestroy() {
+
+    }
+
+=======
+export class HomeComponent implements OnInit, OnDestroy {
     userId = 1;
     courseAction$: Observable<CourseDTO[]> | undefined;
     LoadingState = LoadingState;
@@ -31,30 +64,15 @@ export class HomeComponent implements OnInit,OnDestroy{
         age: 0,
         address: ""
     }
+>>>>>>> online-school-client/task-1-add-components
 
     constructor(private courseService: CourseService, private enrolmentService: EnrolmentService, private studentService: StudentService) {
 
 
 
-    userId=1;
-  constructor() {
-   courseAction$ : Observable<CourseDTO[]> | undefined;
-   loadingAction$ : Observable<LoadingState> | undefined;
-   LoadingState = LoadingState;
-
-   message : string = "";
-
-
-  constructor(private courseService : CourseService) {
     }
 
     ngOnInit() {
-    this.courseAction$ = this.courseService.courseAction$;
-
-    this.loadingAction$ = this.courseService.loadingStateAction$;
-    }
-
-    ngOnDestroy() {
 
         this.requestStateAction$ = this.courseService.requestStateAction$;
         this.courseAction$ = this.courseService.courseAction$;
@@ -89,7 +107,6 @@ export class HomeComponent implements OnInit,OnDestroy{
 
 
     }
-
 
      handleUnSubscribe(course: CourseDTO) {
 

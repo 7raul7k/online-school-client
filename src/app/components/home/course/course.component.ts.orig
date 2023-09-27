@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {CourseDTO} from "../../../models/api/CourseDTO";
+import {CourseService} from "../../../service/course.service";
+=======
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CourseDTO} from "../../../models/api/CourseDTO";
+import {CourseService} from "../../../service/course-service/course.service";
+>>>>>>> online-school-client/task-1-add-components
 
 @Component({
   selector: 'app-course',
@@ -15,9 +21,12 @@ export class CourseComponent implements OnInit,OnDestroy{
     description : ""
   }
 
+<<<<<<< HEAD
+=======
   @Output() onSubscribe = new EventEmitter<CourseDTO>();
 
   @Output() onUnSubscribe = new EventEmitter<CourseDTO>();
+>>>>>>> online-school-client/task-1-add-components
   constructor() {
   }
 
@@ -27,8 +36,8 @@ export class CourseComponent implements OnInit,OnDestroy{
   ngOnDestroy() {
   }
 
-}
-
+<<<<<<< HEAD
+=======
   addSubscribe(course : CourseDTO){
     this.onSubscribe.emit(course);
 
@@ -38,5 +47,6 @@ export class CourseComponent implements OnInit,OnDestroy{
     this.onUnSubscribe.emit(course);
   }
 
+>>>>>>> online-school-client/task-1-add-components
 
 }

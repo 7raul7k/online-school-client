@@ -1,14 +1,13 @@
 <a class="course--module course--link" href="course-detail.html">
   <h2 class="course--label">{{course.name}}</h2>
   <h3 class="course--title">{{course.department}}</h3>
-  <div class="button-container">
-    <button type="submit" (click)="addSubscribe(course)">Subscribe</button>
-    <button type="submit" (click)="unSubscribe(course)">Unsubscribe</button>
-  </div>
+<<<<<<< HEAD
+=======
 
 
   <div class="button-container">
     <button type="submit" (click)="addSubscribe(course)">Subscribe</button>
     <button type="submit" (click)="unSubscribe(course)">Unsubscribe</button>
   </div>
+>>>>>>> online-school-client/task-1-add-components
 </a>

@@ -1,8 +1,12 @@
 
 
+<<<<<<< HEAD
+<div *ngIf="(loadingAction$ | async) === LoadingState.Loading;else loadedState">
+=======
 <div *ngIf="(requestStateAction$ | async) as requestState ">
 
 <div *ngIf="requestState.loadingState === LoadingState.Loading;else loadedState">
+>>>>>>> online-school-client/task-1-add-components
     <p-progressSpinner></p-progressSpinner>
 </div>
 
@@ -20,9 +24,15 @@
     </div>
   </header>
   <main>
+<<<<<<< HEAD
+      <ng-container *ngIf="(loadingAction$ | async) === LoadingState.Success;else errorState">
+    <div class="wrap main--grid">
+     <app-course *ngFor="let item of courseAction$ | async " [course] = item ></app-course>
+=======
       <ng-container *ngIf="requestState.loadingState === LoadingState.Success;else errorState">
     <div class="wrap main--grid">
      <app-course *ngFor="let item of courseAction$ | async " [course] = item (onSubscribe)="handleSubscribe($event)" (onUnSubscribe)="handleUnSubscribe($event)"></app-course>
+>>>>>>> online-school-client/task-1-add-components
       <a class="course--module course--add--module" href="create-course.html">
                     <span class="course--add--title">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -37,6 +47,11 @@
 </ng-template>
 
 <ng-template #errorState>
+<<<<<<< HEAD
+   <app-error [message]="message"></app-error>
+</ng-template>
+=======
    <app-error [message]="requestState.message"></app-error>
 </ng-template>
 </div>
+>>>>>>> online-school-client/task-1-add-components
